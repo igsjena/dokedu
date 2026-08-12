@@ -11,7 +11,7 @@ const client = new pg.Client({
   database: "postgres",
   user: process.env.DB_USER ?? "postgres",
   password: process.env.DB_PASSWORD,
-  ssl: { rejectUnauthorized: false },
+  ssl: true,
 })
 
 await client.connect()
