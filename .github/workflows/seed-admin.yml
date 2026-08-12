@@ -4,15 +4,15 @@ on:
   workflow_dispatch:
     inputs:
       email:
-        description: 'Admin E-Mail'
+        description: Admin E-Mail
         required: true
       password:
-        description: 'Admin Passwort'
+        description: Admin Passwort
         required: true
       org_name:
-        description: 'Name der Schule/Organisation'
+        description: Name der Schule
         required: true
-        default: 'Meine Schule'
+        default: Meine Schule
 
 jobs:
   seed:
@@ -20,8 +20,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
-      - run: bun install
-- name: Create admin user
+      - name: Install dependencies
+        run: bun install
+      - name: Create admin user
         run: bun run scripts/seed-admin.ts
         env:
           DB_HOST: ${{ secrets.DB_HOST }}
