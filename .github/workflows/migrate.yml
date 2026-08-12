@@ -1,0 +1,17 @@
+name: Run DB Migrations
+
+on:
+  workflow_dispatch:  # Manuell auslösbar über GitHub Actions Tab
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - name: Install dependencies
+        run: bun install
+      - name: Run migrations
+        run: bun run db:migrate
+        env:
+          NUXT_DSN: ${{ secrets.NUXT_DSN }}
