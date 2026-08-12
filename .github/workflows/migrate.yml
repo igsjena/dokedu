@@ -20,3 +20,4 @@ jobs:
           DB_HOST: ${{ secrets.DB_HOST }}
           DB_USER: ${{ secrets.DB_USER }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          NODE_TLS_REJECT_UNAUTHORIZED: "0"
