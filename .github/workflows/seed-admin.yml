@@ -21,10 +21,12 @@ jobs:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
       - run: bun install
-      - name: Create admin user
+- name: Create admin user
         run: bun run scripts/seed-admin.ts
         env:
-          NUXT_DSN: ${{ secrets.NUXT_DSN }}
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
           ADMIN_EMAIL: ${{ inputs.email }}
           ADMIN_PASSWORD: ${{ inputs.password }}
           ORG_NAME: ${{ inputs.org_name }}
