@@ -1,0 +1,30 @@
+name: Seed Admin User
+
+on:
+  workflow_dispatch:
+    inputs:
+      email:
+        description: 'Admin E-Mail'
+        required: true
+      password:
+        description: 'Admin Passwort'
+        required: true
+      org_name:
+        description: 'Name der Schule/Organisation'
+        required: true
+        default: 'Meine Schule'
+
+jobs:
+  seed:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install
+      - name: Create admin user
+        run: bun run scripts/seed-admin.ts
+        env:
+          NUXT_DSN: ${{ secrets.NUXT_DSN }}
+          ADMIN_EMAIL: ${{ inputs.email }}
+          ADMIN_PASSWORD: ${{ inputs.password }}
+          ORG_NAME: ${{ inputs.org_name }}
